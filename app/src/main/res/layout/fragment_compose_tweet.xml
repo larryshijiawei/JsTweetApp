@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    android:id="@+id/compose_tweet">
+
+    <ImageView
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:id="@+id/iv_composer_icon"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:src="#1d9383" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Jiawei Shi"
+        android:id="@+id/tv_composer_fullName"
+        android:layout_alignParentTop="true"
+        android:layout_toLeftOf="@+id/iv_composer_icon"
+        android:layout_toStartOf="@+id/iv_composer_icon"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="\@jiawshi"
+        android:id="@+id/tv_composer_screenName"
+        android:layout_below="@+id/tv_composer_fullName"
+        android:layout_toLeftOf="@+id/iv_composer_icon"
+        android:layout_alignBottom="@+id/iv_composer_icon"
+        android:layout_alignLeft="@+id/tv_composer_fullName"
+        android:layout_alignStart="@+id/tv_composer_fullName"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="300dp"
+        android:inputType="textMultiLine"
+        android:ems="10"
+        android:id="@+id/et_newTweet_body"
+        android:layout_below="@+id/tv_composer_screenName"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="45dp"
+        android:layout_alignRight="@+id/iv_composer_icon"
+        android:layout_alignEnd="@+id/iv_composer_icon" />
+
+    <Button
+        android:layout_width="100dp"
+        android:layout_height="60dp"
+        android:text="Tweet"
+        android:id="@+id/btn_postTweet"
+        android:layout_below="@+id/et_newTweet_body"
+        android:layout_alignRight="@+id/iv_composer_icon"
+        android:layout_alignEnd="@+id/iv_composer_icon"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp" />
+</RelativeLayout>
