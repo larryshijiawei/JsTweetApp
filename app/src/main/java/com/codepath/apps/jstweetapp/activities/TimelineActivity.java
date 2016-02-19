@@ -1,6 +1,5 @@
 package com.codepath.apps.jstweetapp.activities;
 
-import android.content.Intent;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -18,6 +17,7 @@ import com.codepath.apps.jstweetapp.adapters.TweetsArrayAdapter;
 import com.codepath.apps.jstweetapp.TwitterApplication;
 import com.codepath.apps.jstweetapp.TwitterClient;
 import com.codepath.apps.jstweetapp.fragments.ComposeTweetFragment;
+import com.codepath.apps.jstweetapp.fragments.ComposeTweetFragmentCallback;
 import com.codepath.apps.jstweetapp.models.Tweet;
 import com.codepath.apps.jstweetapp.models.User;
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -25,12 +25,11 @@ import com.loopj.android.http.JsonHttpResponseHandler;
 import org.apache.http.Header;
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.parceler.Parcels;
 
 import java.util.ArrayList;
 
 
-public class TimelineActivity extends AppCompatActivity {
+public class TimelineActivity extends AppCompatActivity implements ComposeTweetFragmentCallback{
     private final String TAG = TimelineActivity.class.getSimpleName();
     private final int REQUEST_CODE = 200;
 
@@ -99,15 +98,9 @@ public class TimelineActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if(item.getItemId() == R.id.actionComposeTweet){
-            Toast.makeText(getApplicationContext(), "Compose Tweet", Toast.LENGTH_LONG).show();
-//            Intent intent = new Intent(this, TweetActivity.class);
-//            if(mUser != null)
-//                intent.putExtra("user", Parcels.wrap(mUser));
-//            //startActivity(intent);
-//            startActivityForResult(intent, REQUEST_CODE);
-
             FragmentManager fm = getSupportFragmentManager();
             ComposeTweetFragment fragment = ComposeTweetFragment.getInstance();
+            fragment.setUser(mUser);
             fragment.show(fm, "Fragment");
 
             return true;
@@ -117,14 +110,23 @@ public class TimelineActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(requestCode == REQUEST_CODE && resultCode == RESULT_OK){
-            Tweet newTweet = (Tweet) Parcels.unwrap(data.getParcelableExtra("newTweet"));
-            if(newTweet != null){
-                tweets.add(0, newTweet);
-                adapter.notifyDataSetChanged();
+    public void onPostTweet(String textBody) {
+        client = TwitterApplication.getRestClient();
+        client.postTweet(textBody, new JsonHttpResponseHandler(){
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                Tweet newTweet = Tweet.fromJSON(response);
+                if(newTweet != null){
+                    tweets.add(0, newTweet);
+                    adapter.notifyDataSetChanged();
+                }
             }
-        }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                Log.d(TAG, responseString);
+            }
+        });
     }
 
     //The load will give back the tweets which is older than the toId

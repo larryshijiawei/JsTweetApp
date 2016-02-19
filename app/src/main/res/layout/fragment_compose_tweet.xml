@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
     android:padding="10dp"
     android:id="@+id/compose_tweet">
 
@@ -39,26 +39,41 @@
         android:layout_marginRight="10dp" />
 
     <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="300dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:inputType="textMultiLine"
-        android:ems="10"
+        android:hint="What's happening?"
         android:id="@+id/et_newTweet_body"
-        android:layout_below="@+id/tv_composer_screenName"
+        android:layout_below="@+id/iv_composer_icon"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="45dp"
+        android:layout_marginTop="10dp"
         android:layout_alignRight="@+id/iv_composer_icon"
-        android:layout_alignEnd="@+id/iv_composer_icon" />
+        android:layout_alignEnd="@+id/iv_composer_icon"
+        android:layout_above="@+id/btn_postTweet"
+        android:gravity="top" />
 
     <Button
         android:layout_width="100dp"
         android:layout_height="60dp"
         android:text="Tweet"
         android:id="@+id/btn_postTweet"
-        android:layout_below="@+id/et_newTweet_body"
         android:layout_alignRight="@+id/iv_composer_icon"
         android:layout_alignEnd="@+id/iv_composer_icon"
         android:layout_marginRight="10dp"
-        android:layout_marginTop="10dp" />
+        android:layout_marginTop="10dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="20dp"
+        android:background="@color/light_blue"
+        android:textColor="@color/dark_blue" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="140"
+        android:id="@+id/tv_remainCharacters"
+        android:layout_alignBottom="@+id/btn_postTweet"
+        android:layout_toLeftOf="@+id/tv_composer_screenName"
+        android:layout_toStartOf="@+id/tv_composer_screenName"
+        android:layout_marginBottom="20dp" />
 </RelativeLayout>
