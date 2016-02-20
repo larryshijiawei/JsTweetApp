@@ -21,13 +21,29 @@ import java.util.List;
  */
 public class TweetsArrayAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
+    public interface OnItemClickedListener{
+        void onItemClicked(int position);
+    }
+
+    private OnItemClickedListener mOnItemClickedListener;
+
+    public void setOnItemClickedListener(OnItemClickedListener listener){
+        this.mOnItemClickedListener = listener;
+    }
+
+
     public static class ViewHolder extends  RecyclerView.ViewHolder{
         public ImageView ivProfileImage;
         public TextView tvUserName;
         public TextView tvScreenName;
         public TextView tvBody;
         public TextView tvTimeStamp;
+        public TextView tvRetweetCount;
+        public TextView tvFavoriteCount;
         public ImageView ivTweetImage;
+        public ImageView ivReTweet;
+        public ImageView ivFavorite;
+
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -37,9 +53,13 @@ public class TweetsArrayAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             tvBody = (TextView) itemView.findViewById(R.id.tvBody);
             tvTimeStamp = (TextView) itemView.findViewById(R.id.tvTimeStamp);
             tvScreenName = (TextView) itemView.findViewById(R.id.tvScreenName);
+            tvRetweetCount = (TextView) itemView.findViewById(R.id.tv_retweet_count);
+            tvFavoriteCount = (TextView) itemView.findViewById(R.id.tv_favorite_count);
             ivTweetImage = (ImageView) itemView.findViewById(R.id.iv_tweetImage);
+            ivReTweet = (ImageView) itemView.findViewById(R.id.iv_retweet);
+            ivFavorite = (ImageView) itemView.findViewById(R.id.iv_favorite);
         }
-        
+
     }
 
 
@@ -63,7 +83,7 @@ public class TweetsArrayAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         Tweet tweet = tweets.get(position);
         ViewHolder viewHolder = (ViewHolder) holder;
 
@@ -78,6 +98,25 @@ public class TweetsArrayAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
         viewHolder.ivTweetImage.setImageResource(android.R.color.transparent);
         Picasso.with(mContext).load(tweet.getImageUrl()).transform(new FixedWidthTransformation()).into(viewHolder.ivTweetImage);
+
+        viewHolder.tvFavoriteCount.setText(Integer.toString(tweet.getFavoriteCount()));
+        viewHolder.tvRetweetCount.setText(Integer.toString(tweet.getReTweetCount()));
+
+        //Add listener to the item
+        //The detail view will show up only when the body/image is clicked
+        if(mOnItemClickedListener != null){
+            View.OnClickListener listener = new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    mOnItemClickedListener.onItemClicked(position);
+                }
+            };
+
+            viewHolder.tvBody.setOnClickListener(listener);
+            viewHolder.ivTweetImage.setOnClickListener(listener);
+        }
+
+
     }
 
     @Override
@@ -94,4 +133,5 @@ public class TweetsArrayAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         tweets.addAll(tweetList);
         notifyDataSetChanged();
     }
+
 }

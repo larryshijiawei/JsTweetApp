@@ -7,12 +7,14 @@ import com.activeandroid.query.Select;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.parceler.Parcel;
 
 /**
  * Created by jiaweishi on 2/17/16.
  */
 
 @Table(name= "Users")
+@Parcel(analyze = {User.class})
 public class User extends Model{
     @Column(name = "remote_id", unique = true)
     long uid;

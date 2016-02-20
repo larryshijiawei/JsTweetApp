@@ -67,4 +67,68 @@
         android:layout_marginTop="10dp"
         android:layout_alignParentRight="false"
         android:src="#0f3e54" />
+
+    <ImageView
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:id="@+id/iv_reply"
+        android:layout_below="@+id/iv_tweetImage"
+        android:layout_alignLeft="@+id/iv_tweetImage"
+        android:layout_alignStart="@+id/iv_tweetImage"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/icon_reply" />
+
+    <ImageView
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:id="@+id/iv_retweet"
+        android:src="@drawable/icon_retweet_unclicked"
+        android:layout_below="@+id/iv_tweetImage"
+        android:layout_marginTop="10dp"
+        android:layout_toRightOf="@+id/iv_reply"
+        android:layout_marginLeft="80dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="200"
+        android:id="@+id/tv_retweet_count"
+        android:layout_toRightOf="@+id/iv_retweet"
+        android:layout_toEndOf="@+id/iv_retweet"
+        android:layout_marginTop="13dp"
+        android:layout_marginLeft="5dp"
+        android:textSize="12dp"
+        android:layout_below="@+id/iv_tweetImage" />
+
+    <ImageView
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:id="@+id/iv_favorite"
+        android:layout_alignParentRight="false"
+        android:layout_alignParentEnd="false"
+        android:src="@drawable/icon_favorite_unclicked"
+        android:layout_below="@+id/iv_tweetImage"
+        android:layout_marginTop="10dp"
+        android:layout_toRightOf="@+id/tv_retweet_count"
+        android:layout_marginLeft="80dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="40"
+        android:id="@+id/tv_favorite_count"
+        android:layout_toRightOf="@+id/iv_favorite"
+        android:layout_toEndOf="@+id/iv_favorite"
+        android:textSize="12dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="13dp"
+        android:layout_below="@+id/iv_tweetImage" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"
+        android:layout_below="@+id/iv_reply"
+        android:layout_marginTop="5dp" />
+
 </RelativeLayout>

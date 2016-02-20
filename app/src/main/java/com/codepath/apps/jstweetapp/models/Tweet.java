@@ -9,6 +9,7 @@ import com.activeandroid.annotation.Table;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.parceler.Parcel;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -19,6 +20,7 @@ import java.util.Locale;
  * Created by jiaweishi on 2/17/16.
  */
 @Table(name = "Tweets")
+@Parcel(analyze = {Tweet.class})
 public class Tweet extends Model {
 
     @Column(name = "remote_id", unique = true, onUniqueConflict = Column.ConflictAction.REPLACE)

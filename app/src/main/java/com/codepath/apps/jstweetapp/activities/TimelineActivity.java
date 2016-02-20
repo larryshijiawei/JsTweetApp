@@ -74,6 +74,15 @@ public class TimelineActivity extends AppCompatActivity implements ComposeTweetF
         rvTweets = (RecyclerView) findViewById(R.id.lvTweets);
         tweets = new ArrayList<>();
         adapter = new TweetsArrayAdapter(this, tweets);
+        adapter.setOnItemClickedListener(new TweetsArrayAdapter.OnItemClickedListener() {
+            @Override
+            public void onItemClicked(int position) {
+                Log.d(TAG, "item at positon " + position +" is clicked");
+                //Open up the detail view
+
+            }
+        });
+
         rvTweets.setAdapter(adapter);
 
 
