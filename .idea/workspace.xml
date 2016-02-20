@@ -6,7 +6,7 @@
     </shared>
   </component>
   <component name="AndroidLogFilters">
-    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
+    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="No Filters" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7a71fb96-0d57-4d7d-8e42-991075525f64" name="Default" comment="" />
@@ -29,26 +29,36 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="ComposeTweetFragment.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ComposeTweetFragment.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/codepath/apps/jstweetapp/fragments/ComposeTweetFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6385542">
-              <caret line="56" column="79" selection-start-line="56" selection-start-column="79" selection-end-line="56" selection-end-column="79" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="53" column="76" selection-start-line="53" selection-start-column="76" selection-end-line="53" selection-end-column="76" />
               <folding>
-                <element signature="e#1246#1247#0" expanded="true" />
-                <element signature="e#1274#1275#0" expanded="true" />
-                <element signature="e#2494#2810#0" expanded="true" />
-                <element signature="e#2809#2810#0" expanded="true" />
+                <element signature="e#1299#1300#0" expanded="true" />
+                <element signature="e#1327#1328#0" expanded="true" />
+                <element signature="e#2580#2896#0" expanded="true" />
+                <element signature="e#2895#2896#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TimelineActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/codepath/apps/jstweetapp/activities/TimelineActivity.java">
+      <file leaf-file-name="TweetsArrayAdapter.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/codepath/apps/jstweetapp/adapters/TweetsArrayAdapter.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="134" column="32" selection-start-line="134" selection-start-column="32" selection-end-line="134" selection-end-column="32" />
+              <caret line="84" column="22" selection-start-line="84" selection-start-column="16" selection-end-line="84" selection-end-column="22" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TimelineActivity.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/codepath/apps/jstweetapp/activities/TimelineActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="1.8400877">
+              <caret line="141" column="47" selection-start-line="141" selection-start-column="47" selection-end-line="141" selection-end-column="47" />
               <folding />
             </state>
           </provider>
@@ -1440,13 +1450,15 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/src/main/java/com/codepath/apps/jstweetapp/models/User.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/styles.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_compose_tweet.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/codepath/apps/jstweetapp/fragments/ComposeTweetFragmentCallback.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/codepath/apps/jstweetapp/activities/TimelineActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/codepath/apps/jstweetapp/fragments/ComposeTweetFragment.java" />
         <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/codepath/apps/jstweetapp/models/User.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/codepath/apps/jstweetapp/CircleTransform.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/codepath/apps/jstweetapp/fragments/ComposeTweetFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/codepath/apps/jstweetapp/adapters/TweetsArrayAdapter.java" />
       </list>
     </option>
   </component>
@@ -1470,7 +1482,7 @@
     <ConfirmationsSetting value="0" id="Remove" />
   </component>
   <component name="ProjectView">
-    <navigator currentView="ProjectPane" proportions="" version="1">
+    <navigator currentView="AndroidView" proportions="" version="1">
       <flattenPackages />
       <showMembers />
       <showModules />
@@ -1912,14 +1924,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/codepath/apps/jstweetapp/models/User.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.32858709">
-          <caret line="22" column="66" selection-start-line="22" selection-start-column="66" selection-end-line="22" selection-end-column="66" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$PROJECT_DIR$/../../Work/Android/sdk/platforms/android-23/android.jar!/android/content/res/Resources.class">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.42553192">
@@ -1955,22 +1959,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/codepath/apps/jstweetapp/adapters/TweetsArrayAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.37787515">
-          <caret line="35" column="0" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/codepath/apps/jstweetapp/activities/TimelineActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="134" column="32" selection-start-line="134" selection-start-column="32" selection-end-line="134" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1979,16 +1967,52 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/codepath/apps/jstweetapp/CircleTransform.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.44359255">
+          <caret line="27" column="34" selection-start-line="27" selection-start-column="34" selection-end-line="27" selection-end-column="34" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1239#1240#0" expanded="true" />
+            <element signature="e#1270#1271#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/codepath/apps/jstweetapp/models/User.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.21358159">
+          <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/codepath/apps/jstweetapp/fragments/ComposeTweetFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6385542">
-          <caret line="56" column="79" selection-start-line="56" selection-start-column="79" selection-end-line="56" selection-end-column="79" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="53" column="76" selection-start-line="53" selection-start-column="76" selection-end-line="53" selection-end-column="76" />
           <folding>
-            <element signature="e#1246#1247#0" expanded="true" />
-            <element signature="e#1274#1275#0" expanded="true" />
-            <element signature="e#2494#2810#0" expanded="true" />
-            <element signature="e#2809#2810#0" expanded="true" />
+            <element signature="e#1299#1300#0" expanded="true" />
+            <element signature="e#1327#1328#0" expanded="true" />
+            <element signature="e#2580#2896#0" expanded="true" />
+            <element signature="e#2895#2896#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/codepath/apps/jstweetapp/adapters/TweetsArrayAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="84" column="22" selection-start-line="84" selection-start-column="16" selection-end-line="84" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/codepath/apps/jstweetapp/activities/TimelineActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.8400877">
+          <caret line="141" column="47" selection-start-line="141" selection-start-column="47" selection-end-line="141" selection-end-column="47" />
+          <folding />
         </state>
       </provider>
     </entry>

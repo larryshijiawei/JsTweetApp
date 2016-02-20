@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.codepath.apps.jstweetapp.CircleTransform;
 import com.codepath.apps.jstweetapp.R;
 import com.codepath.apps.jstweetapp.models.Tweet;
 import com.squareup.picasso.Picasso;
@@ -36,7 +37,6 @@ public class TweetsArrayAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
 
     }
-
 
 
     private Context mContext;
@@ -69,7 +69,7 @@ public class TweetsArrayAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         viewHolder.tvTimeStamp.setText(tweet.getRelativeTimeAgo());
 
         viewHolder.ivProfileImage.setImageResource(android.R.color.transparent);
-        Picasso.with(mContext).load(tweet.getUser().getProfileImageUrl()).into(viewHolder.ivProfileImage);
+        Picasso.with(mContext).load(tweet.getUser().getProfileImageUrl()).transform(new CircleTransform()).into(viewHolder.ivProfileImage);
     }
 
     @Override

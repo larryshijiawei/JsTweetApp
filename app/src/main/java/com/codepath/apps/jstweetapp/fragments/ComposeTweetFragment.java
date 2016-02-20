@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.codepath.apps.jstweetapp.CircleTransform;
 import com.codepath.apps.jstweetapp.R;
 import com.codepath.apps.jstweetapp.models.User;
 import com.squareup.picasso.Picasso;
@@ -60,7 +61,7 @@ public class ComposeTweetFragment extends DialogFragment {
         getDialog().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
 
         imageView_composerIcon = (ImageView) view.findViewById(R.id.iv_composer_icon);
-        Picasso.with(view.getContext()).load(mUser.getProfileImageUrl()).into(imageView_composerIcon);
+        Picasso.with(view.getContext()).load(mUser.getProfileImageUrl()).transform(new CircleTransform()).into(imageView_composerIcon);
 
         textView_composerName = (TextView) view.findViewById(R.id.tv_composer_fullName);
         textView_composerName.setText(mUser.getName());
