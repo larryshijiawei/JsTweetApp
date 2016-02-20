@@ -2,10 +2,13 @@ package com.codepath.apps.jstweetapp.models;
 
 import android.text.format.DateUtils;
 
+import com.activeandroid.Model;
+import com.activeandroid.annotation.Column;
+import com.activeandroid.annotation.Table;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.parceler.Parcel;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -15,11 +18,19 @@ import java.util.Locale;
 /**
  * Created by jiaweishi on 2/17/16.
  */
-@Parcel
-public class Tweet {
-    String body;
+@Table(name = "Tweets")
+public class Tweet extends Model {
+
+    @Column(name = "remote_id", unique = true, onUniqueConflict = Column.ConflictAction.REPLACE)
     long uid;
+
+    @Column(name = "Body")
+    String body;
+
+    @Column(name = "CreateOn")
     String createOn;
+
+    @Column(name="User", onUpdate = Column.ForeignKeyAction.CASCADE, onDelete = Column.ForeignKeyAction.CASCADE)
     User user;
 
 
@@ -62,8 +73,9 @@ public class Tweet {
             tweet.body = jsonObject.getString("text");
             tweet.uid = jsonObject.getLong("id");
             tweet.createOn = jsonObject.getString("created_at");
-            tweet.user = User.fromJSON(jsonObject.getJSONObject("user"));
+            tweet.user = User.findOrCreateFromJson(jsonObject.getJSONObject("user"));
 
+            tweet.save();
         } catch (JSONException e) {
             e.printStackTrace();
         }

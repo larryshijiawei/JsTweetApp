@@ -1,5 +1,8 @@
 package com.codepath.apps.jstweetapp.activities;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -11,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.activeandroid.query.Select;
 import com.codepath.apps.jstweetapp.EndlessRecyclerViewScrollListener;
 import com.codepath.apps.jstweetapp.R;
 import com.codepath.apps.jstweetapp.adapters.TweetsArrayAdapter;
@@ -22,11 +26,14 @@ import com.codepath.apps.jstweetapp.models.Tweet;
 import com.codepath.apps.jstweetapp.models.User;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
+
 import org.apache.http.Header;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 
 public class TimelineActivity extends AppCompatActivity implements ComposeTweetFragmentCallback{
@@ -53,7 +60,7 @@ public class TimelineActivity extends AppCompatActivity implements ComposeTweetF
             @Override
             public void onRefresh() {
                 adapter.clear();
-                loadMoreTimeline(-1);
+                loadTimeline();
                 swipeContainer.setRefreshing(false);
             }
         });
@@ -77,7 +84,8 @@ public class TimelineActivity extends AppCompatActivity implements ComposeTweetF
             public void onLoadMore(int page, int totalItemsCount) {
                 //Get the id of the last tweet
                 long sinceId = tweets.get(tweets.size()-1).getUid();
-                loadMoreTimeline(sinceId);
+                //loadMoreTimeline(sinceId);
+                loadTimeline();
             }
         });
 
@@ -86,7 +94,8 @@ public class TimelineActivity extends AppCompatActivity implements ComposeTweetF
 
         loadUser();
 
-        loadMoreTimeline(-1);
+        //loadMoreTimeline(-1);
+        loadTimeline();
     }
 
     @Override
@@ -112,11 +121,11 @@ public class TimelineActivity extends AppCompatActivity implements ComposeTweetF
     @Override
     public void onPostTweet(String textBody) {
         client = TwitterApplication.getRestClient();
-        client.postTweet(textBody, new JsonHttpResponseHandler(){
+        client.postTweet(textBody, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 Tweet newTweet = Tweet.fromJSON(response);
-                if(newTweet != null){
+                if (newTweet != null) {
                     tweets.add(0, newTweet);
                     adapter.notifyDataSetChanged();
                 }
@@ -131,8 +140,26 @@ public class TimelineActivity extends AppCompatActivity implements ComposeTweetF
 
     //The load will give back the tweets which is older than the toId
     //-1 means to get the very first page
-    private void loadMoreTimeline(long toId){
-        client.getHomeTimeline(toId,new JsonHttpResponseHandler(){
+//    private void loadMoreTimeline(long toId){
+//        client.getHomeTimeline(toId, new JsonHttpResponseHandler() {
+//            @Override
+//            public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
+//                Log.d(TAG, response.toString());
+//                //deserialize json, create models, load model data to listView
+//                ArrayList<Tweet> tweetsFromJson = Tweet.fromJSONArray(response);
+//                tweets.addAll(tweetsFromJson);
+//                adapter.notifyDataSetChanged();
+//            }
+//
+//            @Override
+//            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+//                Log.d(TAG, errorResponse.toString());
+//            }
+//        });
+//    }
+
+    private void onlineLoadTimeline(long toId){
+        client.getHomeTimeline(toId, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
                 Log.d(TAG, response.toString());
@@ -149,6 +176,42 @@ public class TimelineActivity extends AppCompatActivity implements ComposeTweetF
         });
     }
 
+    private void offlineLoadTimeline(){
+        int offset = tweets.size();
+        List<Tweet> tweetsFromOffline = new Select()
+                .from(Tweet.class)
+                .offset(offset)
+                .limit(20)
+                .orderBy("CreateOn")
+                .execute();
+
+        Collections.reverse(tweetsFromOffline);
+
+        tweets.addAll(tweetsFromOffline);
+        adapter.notifyDataSetChanged();
+    }
+
+    private void loadTimeline(){
+        //In case of online
+        if(isNetworkAvailable()){
+            Toast.makeText(getApplicationContext(), "Network is online", Toast.LENGTH_LONG).show();
+
+            if(tweets.size() == 0){
+                //In case of fresh load
+                onlineLoadTimeline(-1);
+            }
+            else{
+                long to = tweets.get(tweets.size()-1).getUid();
+                onlineLoadTimeline(to);
+            }
+        }
+        else{
+            //In case of offline, load from cache
+            Toast.makeText(getApplicationContext(), "Network is offline", Toast.LENGTH_LONG).show();
+            offlineLoadTimeline();
+        }
+    }
+
     //Load the information of the current user
     private void loadUser(){
         client.getUser(new JsonHttpResponseHandler(){
@@ -162,5 +225,12 @@ public class TimelineActivity extends AppCompatActivity implements ComposeTweetF
                 Log.d(TAG, errorResponse.toString());
             }
         });
+    }
+
+    private boolean isNetworkAvailable(){
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnectedOrConnecting();
     }
 }

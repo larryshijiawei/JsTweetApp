@@ -37,4 +37,7 @@ dependencies {
 
     compile 'org.parceler:parceler-api:1.0.4'
     apt 'org.parceler:parceler:1.0.4'
+
+    compile 'com.michaelpardo:activeandroid:3.1.0-SNAPSHOT'
+
 }
