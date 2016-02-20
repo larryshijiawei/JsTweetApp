@@ -83,8 +83,6 @@ public class TimelineActivity extends AppCompatActivity implements ComposeTweetF
             @Override
             public void onLoadMore(int page, int totalItemsCount) {
                 //Get the id of the last tweet
-                long sinceId = tweets.get(tweets.size()-1).getUid();
-                //loadMoreTimeline(sinceId);
                 loadTimeline();
             }
         });
@@ -94,7 +92,6 @@ public class TimelineActivity extends AppCompatActivity implements ComposeTweetF
 
         loadUser();
 
-        //loadMoreTimeline(-1);
         loadTimeline();
     }
 
@@ -138,25 +135,6 @@ public class TimelineActivity extends AppCompatActivity implements ComposeTweetF
         });
     }
 
-    //The load will give back the tweets which is older than the toId
-    //-1 means to get the very first page
-//    private void loadMoreTimeline(long toId){
-//        client.getHomeTimeline(toId, new JsonHttpResponseHandler() {
-//            @Override
-//            public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
-//                Log.d(TAG, response.toString());
-//                //deserialize json, create models, load model data to listView
-//                ArrayList<Tweet> tweetsFromJson = Tweet.fromJSONArray(response);
-//                tweets.addAll(tweetsFromJson);
-//                adapter.notifyDataSetChanged();
-//            }
-//
-//            @Override
-//            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
-//                Log.d(TAG, errorResponse.toString());
-//            }
-//        });
-//    }
 
     private void onlineLoadTimeline(long toId){
         client.getHomeTimeline(toId, new JsonHttpResponseHandler() {

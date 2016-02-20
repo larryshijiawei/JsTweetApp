@@ -30,6 +30,15 @@ public class Tweet extends Model {
     @Column(name = "CreateOn")
     String createOn;
 
+    @Column(name = "RetweetCount")
+    int reTweetCount;
+
+    @Column(name = "FavoriteCount")
+    int favoriteCount;
+
+    @Column(name = "ImageUrl")
+    String imageUrl;
+
     @Column(name="User", onUpdate = Column.ForeignKeyAction.CASCADE, onDelete = Column.ForeignKeyAction.CASCADE)
     User user;
 
@@ -44,6 +53,18 @@ public class Tweet extends Model {
 
     public String getCreateOn() {
         return createOn;
+    }
+
+    public int getReTweetCount() {
+        return reTweetCount;
+    }
+
+    public int getFavoriteCount() {
+        return favoriteCount;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
     }
 
     public String getRelativeTimeAgo() {
@@ -73,6 +94,18 @@ public class Tweet extends Model {
             tweet.body = jsonObject.getString("text");
             tweet.uid = jsonObject.getLong("id");
             tweet.createOn = jsonObject.getString("created_at");
+            tweet.reTweetCount = jsonObject.getInt("retweet_count");
+            tweet.favoriteCount = jsonObject.getInt("favorite_count");
+
+            //Fetch the image url
+            JSONObject entities = jsonObject.getJSONObject("entities");
+            if(entities.has("media")){
+                JSONArray medias = entities.getJSONArray("media");
+                if(medias.length() != 0){
+                    tweet.imageUrl = medias.getJSONObject(0).getString("media_url");
+                }
+            }
+
             tweet.user = User.findOrCreateFromJson(jsonObject.getJSONObject("user"));
 
             tweet.save();
