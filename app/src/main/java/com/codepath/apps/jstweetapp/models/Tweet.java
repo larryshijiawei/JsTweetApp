@@ -75,16 +75,20 @@ public class Tweet extends Model {
         SimpleDateFormat sf = new SimpleDateFormat(twitterFormat, Locale.ENGLISH);
         sf.setLenient(true);
 
-        String relativeDate = "";
         try {
             long dateMillis = sf.parse(createOn).getTime();
-            relativeDate = DateUtils.getRelativeTimeSpanString(dateMillis,
-                    System.currentTimeMillis(), DateUtils.SECOND_IN_MILLIS).toString();
+            String date = DateUtils.getRelativeTimeSpanString(dateMillis,
+                    System.currentTimeMillis(), DateUtils.MINUTE_IN_MILLIS).toString();
+
+            //try to hard-coded and parse the relative time into simple format
+            int index = date.indexOf(" ");
+
+            return date.substring(0, index) + date.substring(index+1, index+2);
         } catch (ParseException e) {
-            e.printStackTrace();
+            return "";
         }
 
-        return relativeDate;
+
     }
 
     public String getTimeStamp(){

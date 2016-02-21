@@ -1,5 +1,7 @@
 package com.codepath.apps.jstweetapp.models;
 
+import android.util.Log;
+
 import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
@@ -41,10 +43,9 @@ public class User extends Model{
             user.name = jsonObject.getString("name");
             user.uid = jsonObject.getLong("id");
             user.screenName = jsonObject.getString("screen_name");
-            user.profileImageUrl = jsonObject.getString("profile_image_url");
+            //Use the bigger image icon instead of the normal one
+            user.profileImageUrl = jsonObject.getString("profile_image_url").replace("normal", "bigger");
 
-            //save to DB
-            //user.save();
         } catch (JSONException e) {
             e.printStackTrace();
         }
