@@ -14,6 +14,7 @@ import org.parceler.Parcel;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Locale;
 
 /**
@@ -84,6 +85,24 @@ public class Tweet extends Model {
         }
 
         return relativeDate;
+    }
+
+    public String getTimeStamp(){
+        String twitterFormat = "EEE MMM dd HH:mm:ss ZZZZZ yyyy";
+        String displayFormat = "HH:mm yyyy-MM-dd";
+        SimpleDateFormat sf = new SimpleDateFormat(twitterFormat, Locale.ENGLISH);
+        sf.setLenient(true);
+
+        String timeStamp = "";
+
+        try {
+            Date date = sf.parse(this.createOn);
+            timeStamp = new SimpleDateFormat(displayFormat).format(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return timeStamp;
     }
 
     public User getUser() {

@@ -1,8 +1,10 @@
 package com.codepath.apps.jstweetapp.activities;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Parcel;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -30,6 +32,7 @@ import com.loopj.android.http.JsonHttpResponseHandler;
 import org.apache.http.Header;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.parceler.Parcels;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -77,9 +80,17 @@ public class TimelineActivity extends AppCompatActivity implements ComposeTweetF
         adapter.setOnItemClickedListener(new TweetsArrayAdapter.OnItemClickedListener() {
             @Override
             public void onItemClicked(int position) {
-                Log.d(TAG, "item at positon " + position +" is clicked");
                 //Open up the detail view
+                Tweet selectedTweet = tweets.get(position);
+                Intent intent = new Intent(TimelineActivity.this, TweetDetailActivity.class);
+                intent.putExtra("tweet", Parcels.wrap(selectedTweet));
+                startActivity(intent);
+            }
 
+            @Override
+            public void onReplyClicked(int position) {
+                Tweet selectedTweet = tweets.get(position);
+                openComposeDialog(selectedTweet.getUser().getScreenName());
             }
         });
 
@@ -113,11 +124,7 @@ public class TimelineActivity extends AppCompatActivity implements ComposeTweetF
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if(item.getItemId() == R.id.actionComposeTweet){
-            FragmentManager fm = getSupportFragmentManager();
-            ComposeTweetFragment fragment = ComposeTweetFragment.getInstance();
-            fragment.setUser(mUser);
-            fragment.show(fm, "Fragment");
-
+            openComposeDialog(null);
             return true;
         }
         else
@@ -142,6 +149,14 @@ public class TimelineActivity extends AppCompatActivity implements ComposeTweetF
                 Log.d(TAG, responseString);
             }
         });
+    }
+
+    private void openComposeDialog(String replyTo){
+        FragmentManager fm = getSupportFragmentManager();
+        ComposeTweetFragment fragment = ComposeTweetFragment.getInstance();
+        fragment.setUser(mUser);
+        fragment.setReplyTo(replyTo);
+        fragment.show(fm, "Fragment");
     }
 
 

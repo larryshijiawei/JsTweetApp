@@ -33,6 +33,7 @@ public class ComposeTweetFragment extends DialogFragment {
     private Button btn_postTweet;
 
     private User mUser;
+    private String replyTo;
 
 
     public ComposeTweetFragment(){
@@ -46,6 +47,10 @@ public class ComposeTweetFragment extends DialogFragment {
 
     public void setUser(User user){
         mUser = user;
+    }
+
+    public void setReplyTo(String replyTo){
+        this.replyTo = replyTo;
     }
 
     @Nullable
@@ -83,6 +88,9 @@ public class ComposeTweetFragment extends DialogFragment {
         });
 
         et_body = (EditText) view.findViewById(R.id.et_newTweet_body);
+        if(replyTo != null)
+            et_body.setText("@"+replyTo, TextView.BufferType.EDITABLE);
+
         et_body.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {

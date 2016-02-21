@@ -8,12 +8,16 @@ import com.squareup.picasso.Transformation;
  * Created by jiaweishi on 2/19/16.
  */
 public class FixedWidthTransformation implements Transformation {
-    private final int WIDTH = 600;
+    private int width;
+
+    public FixedWidthTransformation(int fixedWidth){
+        width = fixedWidth;
+    }
 
     @Override
     public Bitmap transform(Bitmap source) {
-        int newHeight = (source.getHeight() * WIDTH) / source.getWidth();
-        Bitmap result = Bitmap.createScaledBitmap(source, WIDTH, newHeight, false);
+        int newHeight = (source.getHeight() * width) / source.getWidth();
+        Bitmap result = Bitmap.createScaledBitmap(source, width, newHeight, true);
         if(result != source)
             source.recycle();
 
