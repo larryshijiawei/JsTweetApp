@@ -5,9 +5,11 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
@@ -31,6 +33,7 @@ public class ComposeTweetFragment extends DialogFragment {
     private EditText et_body;
     private TextView textView_charCount;
     private Button btn_postTweet;
+    private ImageView imageView_cancel;
 
     private User mUser;
     private String replyTo;
@@ -51,6 +54,14 @@ public class ComposeTweetFragment extends DialogFragment {
 
     public void setReplyTo(String replyTo){
         this.replyTo = replyTo;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Window window = getDialog().getWindow();
+        window.setLayout(760, 1200);
+        window.setGravity(Gravity.CENTER);
     }
 
     @Nullable
@@ -105,6 +116,14 @@ public class ComposeTweetFragment extends DialogFragment {
             @Override
             public void afterTextChanged(Editable editable) {
                 updateCharCounts(editable.toString().length());
+            }
+        });
+
+        imageView_cancel = (ImageView) view.findViewById(R.id.iv_cancel);
+        imageView_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dismiss();
             }
         });
     }

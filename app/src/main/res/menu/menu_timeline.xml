@@ -6,7 +6,7 @@
 
     <item
         android:id="@+id/actionComposeTweet"
-        android:icon="@drawable/ic_launcher"
+        android:icon="@drawable/icon_compose"
         app:showAsAction="ifRoom"
         android:title="Compose"/>
 

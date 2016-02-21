@@ -4,9 +4,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.os.Parcel;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -56,6 +56,13 @@ public class TimelineActivity extends AppCompatActivity implements ComposeTweetF
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_timeline);
+
+        //prepare the action bar
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayShowTitleEnabled(false);
+//        actionBar.setLogo(R.drawable.ic_launcher);
+//        actionBar.setDisplayUseLogoEnabled(true);
+
 
         //Set up the swipe refresh view
         swipeContainer = (SwipeRefreshLayout) findViewById(R.id.swipeContainer);

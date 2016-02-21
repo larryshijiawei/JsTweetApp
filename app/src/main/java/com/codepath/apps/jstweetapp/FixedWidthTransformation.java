@@ -1,6 +1,7 @@
 package com.codepath.apps.jstweetapp;
 
 import android.graphics.Bitmap;
+import android.util.Log;
 
 import com.squareup.picasso.Transformation;
 
@@ -16,6 +17,7 @@ public class FixedWidthTransformation implements Transformation {
 
     @Override
     public Bitmap transform(Bitmap source) {
+        //Log.d("TAG", "original size is "+ source.getHeight() + " " + source.getWidth());
         int newHeight = (source.getHeight() * width) / source.getWidth();
         Bitmap result = Bitmap.createScaledBitmap(source, width, newHeight, true);
         if(result != source)
