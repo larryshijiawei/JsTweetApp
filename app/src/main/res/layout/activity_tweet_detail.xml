@@ -64,7 +64,6 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="2015.5.1"
         android:id="@+id/tv_tweetDetail_timeStamp"
         android:layout_below="@+id/iv_tweetDetail_image"
         android:layout_alignParentLeft="true"

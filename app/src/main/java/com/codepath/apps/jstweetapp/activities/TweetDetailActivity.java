@@ -40,8 +40,8 @@ public class TweetDetailActivity extends AppCompatActivity {
         ImageView iv_image = (ImageView) findViewById(R.id.iv_tweetDetail_image);
         Picasso.with(this).load(tweet.getImageUrl()).transform(new FixedWidthTransformation(700)).into(iv_image);
 
-        TextView tv_timeStamp = (TextView) findViewById(R.id.tv_tweetDetail_timeStamp);
-        tv_timeStamp.setText(tweet.getTimeStamp());
+//        TextView tv_timeStamp = (TextView) findViewById(R.id.tv_tweetDetail_timeStamp);
+//        tv_timeStamp.setText(tweet.getTimeStamp());
 
     }
 }

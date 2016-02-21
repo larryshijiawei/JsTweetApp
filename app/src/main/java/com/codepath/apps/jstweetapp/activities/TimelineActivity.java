@@ -17,7 +17,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.activeandroid.query.Select;
-import com.codepath.apps.jstweetapp.EndlessRecyclerViewScrollListener;
+import com.codepath.apps.jstweetapp.adapters.EndlessRecyclerViewScrollListener;
 import com.codepath.apps.jstweetapp.R;
 import com.codepath.apps.jstweetapp.adapters.TweetsArrayAdapter;
 import com.codepath.apps.jstweetapp.TwitterApplication;
@@ -186,11 +186,10 @@ public class TimelineActivity extends AppCompatActivity implements ComposeTweetF
     }
 
     private void offlineLoadTimeline(){
-        int offset = tweets.size();
+        //int offset = tweets.size();
+        tweets.clear();
         List<Tweet> tweetsFromOffline = new Select()
                 .from(Tweet.class)
-                .offset(offset)
-                .limit(20)
                 .orderBy("CreateOn")
                 .execute();
 
@@ -203,7 +202,7 @@ public class TimelineActivity extends AppCompatActivity implements ComposeTweetF
     private void loadTimeline(){
         //In case of online
         if(isNetworkAvailable()){
-            Toast.makeText(getApplicationContext(), "Network is online", Toast.LENGTH_LONG).show();
+            //Toast.makeText(getApplicationContext(), "Network is online", Toast.LENGTH_LONG).show();
 
             if(tweets.size() == 0){
                 //In case of fresh load
@@ -223,17 +222,19 @@ public class TimelineActivity extends AppCompatActivity implements ComposeTweetF
 
     //Load the information of the current user
     private void loadUser(){
-        client.getUser(new JsonHttpResponseHandler(){
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                mUser = User.fromJSON(response);
-            }
+        if(isNetworkAvailable()){
+            client.getUser(new JsonHttpResponseHandler(){
+                @Override
+                public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                    mUser = User.fromJSON(response);
+                }
 
-            @Override
-            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
-                Log.d(TAG, errorResponse.toString());
-            }
-        });
+                @Override
+                public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                    Log.d(TAG, errorResponse.toString());
+                }
+            });
+        }
     }
 
     private boolean isNetworkAvailable(){
